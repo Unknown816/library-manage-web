@@ -11,8 +11,7 @@
       <el-button @click="add">新增</el-button>
       <el-button @click="loadData">查询</el-button>
     </div>
-    <el-table stripe :data="tableData" style="width: 100%">
-      <el-table-column prop="id" label="id"> </el-table-column>
+    <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="用户名"></el-table-column>
       <el-table-column prop="createDate" label="创建时间">
         <template #default="{ row }">

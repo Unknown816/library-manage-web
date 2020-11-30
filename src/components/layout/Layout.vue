@@ -8,9 +8,10 @@
         </div>
       </el-header>
 
-      <el-container>
+      <el-container style="height: 550px">
         <el-aside width="200px">
           <el-menu
+            class="categories"
             default-active="/book"
             router
             background-color="#545c64"
@@ -65,4 +66,16 @@ export default {
 </script>
 
 <style>
+.el-header {
+  background-color: #303133;
+  color: #c0c4cc;
+  line-height: 60px;
+}
+.categories {
+  position: fixed;
+  margin-left: 50%;
+  left: -605px;
+  top: 80px;
+  width: 150px;
+}
 </style>

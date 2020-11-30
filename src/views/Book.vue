@@ -14,10 +14,10 @@
       </el-form>
     </div>
     <div style="float: right">
-      <el-button @click="add">新增</el-button>
-      <el-button @click="loadData">查询</el-button>
+      <el-button @click="add" icon="el-icon-circle-plus">新增</el-button>
+      <el-button @click="loadData" icon="el-icon-search">查询</el-button>
     </div>
-    <el-table stripe :data="tableData" style="width: 100%">
+    <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="书名"></el-table-column>
       <el-table-column prop="authors" label="作者"> </el-table-column>
       <el-table-column prop="publisher" label="出版商"></el-table-column>
@@ -217,9 +217,9 @@ export default {
     },
     handleFileUploadSuccess(response) {
       this.editForm.file = {
-        id: response
-      }
-    }
+        id: response,
+      };
+    },
   },
 };
 </script>

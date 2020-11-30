@@ -1,16 +1,25 @@
 <template>
   <div class="book-grid">
-    <div class="book-grid-item" v-for="book of list" :key="book.id">
-        <el-image style="height:300px" fit="fit" :src="book.fileBase64"></el-image>
-        <div>
-            {{ book.name }}
-        </div>
+    <div
+      class="book-grid-item"
+      v-for="book of list"
+      :key="book.id"
+      style="border=1"
+    >
+      <el-image
+        style="height: 240px"
+        fit="fit"
+        :src="book.fileBase64"
+      ></el-image>
+      <div>
+        {{ book.name }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 function filterNotEmpty(form) {
   let filtered = {};
@@ -54,11 +63,13 @@ export default {
 
 <style>
 .book-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 200px);
-    gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 170px);
+  gap: 30px;
 }
 
 .book-grid-item {
+  border-radius: 10px;
+  border: 10px solid rgb(190, 190, 190);
 }
 </style>
