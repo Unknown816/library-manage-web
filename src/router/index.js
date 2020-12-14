@@ -3,11 +3,10 @@ import VueRouter from 'vue-router'
 import Book from '../views/Book.vue'
 import Login from '../components/Login.vue'
 import Layout from '../components/layout/Layout.vue'
-import AppIndex from '../components/home/Appindex.vue'
 import Regist from '../components/Regist.vue'
 import User from '../views/User.vue'
 import BookGrid from '../views/BookGrid.vue'
-
+import BookPie from '../views/BookPie.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,11 +22,6 @@ const routes = [
     component: Regist
   },
   {
-    path: '/index',
-    name: 'AppIndex',
-    component: AppIndex
-  },
-  {
     path: '/',
     component: Layout,
     redirect: '/book',
@@ -38,9 +32,14 @@ const routes = [
         component: Book
       },
       {
-        path:'/bookgrid',
-        name:'BookGrid',
-        component:BookGrid
+        path: '/bookgrid',
+        name: 'BookGrid',
+        component: BookGrid
+      },
+      {
+        path: '/bookpie',
+        name: 'BookPie',
+        component: BookPie
       },
       {
         path: '/user',

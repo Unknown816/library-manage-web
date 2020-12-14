@@ -8,8 +8,8 @@
       </el-form>
     </div>
     <div style="float: right">
-      <el-button @click="add">新增</el-button>
-      <el-button @click="loadData">查询</el-button>
+      <el-button @click="add" icon="el-icon-circle-plus-outline">新增</el-button>
+      <el-button @click="loadData" icon="el-icon-search">查询</el-button>
     </div>
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="用户名"></el-table-column>
@@ -44,23 +44,31 @@
       :title="editForm.id ? '编辑' : '新增'"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="editForm">
+      <el-form :model="editForm" label-width="80px" label-position="left">
         <el-form-item label="用户名">
-          <el-input v-model="editForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model="editForm.name"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入用户名"
+          ></el-input>
         </el-form-item>
         <el-form-item label="密码">
           <el-input
             v-model="editForm.password"
             type="password"
-            autocomplete="off"
+            autocomplete="new-password"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入密码"
           ></el-input>
         </el-form-item>
-        <el-form-item label="出版时间">
+        <el-form-item label="创建时间">
           <el-date-picker
             v-model="editForm.createData"
             type="datetime"
             placeholder="选择日期时间"
             default-time="12:00:00"
+            style="width: 100%"
           >
           </el-date-picker>
         </el-form-item>

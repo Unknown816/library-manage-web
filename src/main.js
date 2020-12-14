@@ -4,6 +4,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
+import echarts from 'echarts' //引入echarts
+Vue.prototype.$echarts = echarts //引入组件
 
 axios.defaults.baseURL = '/api'
 

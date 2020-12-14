@@ -11,27 +11,31 @@
       <el-container style="height: 550px">
         <el-aside width="200px">
           <el-menu
+            :default-active="$route.path"
             class="categories"
-            default-active="/book"
             router
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b"
           >
             <el-menu-item index="/book">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-s-home"></i>
               <span slot="title">图书管理</span>
             </el-menu-item>
             <el-menu-item index="/bookgrid">
               <i class="el-icon-menu"></i>
               <span slot="title">图书浏览</span>
             </el-menu-item>
+            <el-menu-item index="/bookpie">
+              <i class="el-icon-pie-chart"></i>
+              <span slot="title">点击量图</span>
+            </el-menu-item>
             <el-menu-item index="/user">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-user"></i>
               <span slot="title">用户管理</span>
             </el-menu-item>
             <el-menu-item index="/about">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-chat-line-square"></i>
               <span slot="title">关于</span>
             </el-menu-item>
           </el-menu>
@@ -74,8 +78,8 @@ export default {
 .categories {
   position: fixed;
   margin-left: 50%;
-  left: -605px;
-  top: 80px;
+  left: -47%;
+  top: 15%;
   width: 150px;
 }
 </style>

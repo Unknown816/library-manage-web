@@ -14,12 +14,15 @@
       </el-form>
     </div>
     <div style="float: right">
-      <el-button @click="add" icon="el-icon-circle-plus">新增</el-button>
+      <el-button @click="add" icon="el-icon-circle-plus-outline"
+        >新增</el-button
+      >
       <el-button @click="loadData" icon="el-icon-search">查询</el-button>
     </div>
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="书名"></el-table-column>
       <el-table-column prop="authors" label="作者"> </el-table-column>
+      <el-table-column prop="click" label="点击量"> </el-table-column>
       <el-table-column prop="publisher" label="出版商"></el-table-column>
       <el-table-column prop="publishDate" label="出版时间">
         <template #default="{ row }">
@@ -52,15 +55,38 @@
       :title="editForm.id ? '编辑' : '新增'"
       :visible.sync="dialogFormVisible"
     >
-      <el-form :model="editForm">
+      <el-form :model="editForm" label-width="80px" label-position="left">
         <el-form-item label="书名">
-          <el-input v-model="editForm.name" autocomplete="off"></el-input>
+          <el-input
+            v-model="editForm.name"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入书名"
+          ></el-input>
         </el-form-item>
         <el-form-item label="作者">
-          <el-input v-model="editForm.authors" autocomplete="off"></el-input>
+          <el-input
+            v-model="editForm.authors"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入作者"
+          ></el-input>
         </el-form-item>
         <el-form-item label="出版商">
-          <el-input v-model="editForm.publisher" autocomplete="off"></el-input>
+          <el-input
+            v-model="editForm.publisher"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入出版商"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="点击量">
+          <el-input
+            v-model="editForm.click"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入初始点击量0"
+          ></el-input>
         </el-form-item>
         <el-form-item label="出版时间">
           <el-date-picker
@@ -68,6 +94,7 @@
             type="datetime"
             placeholder="选择日期时间"
             default-time="12:00:00"
+            style="width: 100%"
           >
           </el-date-picker>
         </el-form-item>
@@ -84,7 +111,10 @@
           </el-upload>
         </el-form-item>
         <el-form-item>
-          <el-image :src="editForm.fileBase64"></el-image>
+          <el-image
+            style="height: 220px; width: 170px"
+            :src="editForm.fileBase64"
+          ></el-image>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -121,7 +151,7 @@ export default {
         name: null,
         authors: null,
         publisher: null,
-        pageSize: 5,
+        pageSize: 10,
         pageIndex: 1,
       },
       editForm: {
@@ -130,6 +160,7 @@ export default {
         authors: "",
         publisher: "",
         publishDate: "",
+        click: null,
       },
       pickerOptions: {
         shortcuts: [

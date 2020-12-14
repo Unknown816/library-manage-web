@@ -1,13 +1,23 @@
 <template>
-  <div class="about">
-    Talking is nothing, show you my code.
+  <div>
+    <div class="about">
+      Talking is nothing, show you my code.<br />
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {};
+  },
+};
+</script>
 
 <style>
 .about {
   font-size: 20px;
-  font-family: '微软雅黑', Arial, Helvetica, sans-serif;
+  font-family: "微软雅黑", Arial, Helvetica, sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;

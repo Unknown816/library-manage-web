@@ -1,5 +1,5 @@
 <template>
-  <body id="paper">
+  <body id="paper1">
     <el-form
       :model="registForm"
       status-icon
@@ -11,19 +11,29 @@
     >
       <h3 class="login_title">用户注册</h3>
       <el-form-item label="用户名" prop="name">
-        <el-input v-model="registForm.name" autocomplete="new-text"></el-input>
+        <el-input
+          v-model="registForm.name"
+          autocomplete="new-text"
+          prefix-icon="el-icon-edit"
+          placeholder="请输入用户名"
+        ></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input
           type="password"
           v-model="registForm.password"
           autocomplete="new-password"
+          prefix-icon="el-icon-edit"
+          placeholder="请输入密码"
         ></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
         <el-input
+          type="password"
           v-model="registForm.checkPass"
           autocomplete="new-password"
+          prefix-icon="el-icon-edit"
+          placeholder="请确认密码"
         ></el-input>
       </el-form-item>
       <el-form-item>
@@ -120,7 +130,7 @@ export default {
 </script>
 
 <style>
-#paper {
+#paper1 {
   background: url("../assets/login.jpg") no-repeat;
   background-position: center;
   height: 100%;
