@@ -8,11 +8,20 @@
       </el-form>
     </div>
     <div style="float: right">
-      <el-button @click="add" icon="el-icon-circle-plus-outline">新增</el-button>
-      <el-button @click="loadData" icon="el-icon-search">查询</el-button>
+      <el-button
+        @click="add"
+        icon="el-icon-circle-plus-outline"
+        type="primary"
+        plain
+        >新增</el-button
+      >
+      <el-button @click="loadData" icon="el-icon-search" type="info" plain
+        >查询</el-button
+      >
     </div>
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="用户名"></el-table-column>
+      <el-table-column prop="sex" label="性别"></el-table-column>
       <el-table-column prop="createDate" label="创建时间">
         <template #default="{ row }">
           {{ dateFormat(row.createData) }}
@@ -62,6 +71,21 @@
             placeholder="请输入密码"
           ></el-input>
         </el-form-item>
+        <el-form-item label="性别">
+          <el-select
+            v-model="editForm.sex"
+            placeholder="请选择"
+            style="width: 100px; float: left"
+          >
+            <el-option
+              v-for="item in Isex"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item label="创建时间">
           <el-date-picker
             v-model="editForm.createData"
@@ -99,6 +123,10 @@ export default {
   name: "User",
   data() {
     return {
+      Isex: [
+        { value: "男", label: "男" },
+        { value: "女", label: "女" },
+      ],
       tableData: [],
       total: 0,
       dialogFormVisible: false,
@@ -112,6 +140,7 @@ export default {
         name: "",
         password: "",
         createData: "",
+        sex: "",
       },
       pickerOptions: {
         shortcuts: [
@@ -171,6 +200,7 @@ export default {
         name: "",
         password: "",
         createData: "",
+        sex: null,
       };
     },
     edit(row) {

@@ -26,7 +26,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button @click="login" type="primary">登录</el-button>
+        <el-button @click="jump" type="primary">登录</el-button>
         <el-button @click="regist" type="primary">注册</el-button>
         <el-button @click="reset('loginForm')" type="primary">重置</el-button>
       </el-form-item>
@@ -36,6 +36,17 @@
 
 <script>
 import axios from "axios";
+
+function filterNotEmpty(form) {
+  let filtered = {};
+  for (const field of Object.keys(form)) {
+    if (form[field]) {
+      filtered[field] = form[field];
+    }
+  }
+  return filtered;
+}
+
 export default {
   name: "Login",
   data() {
@@ -54,9 +65,20 @@ export default {
       }
     };
     return {
+      ok: false,
       loginForm: {
         username: "",
         password: "",
+      },
+      getForm: {
+        id: null,
+        name: "",
+        password: "",
+        qx: "",
+      },
+      searchForm: {
+        name: null,
+        password: null,
       },
       responseResult: [],
       rules: {
@@ -74,19 +96,44 @@ export default {
     };
   },
   methods: {
+    async is_qx() {
+      await axios
+        .get("/users", { params: filterNotEmpty(this.searchForm) })
+        .then((response) => {
+          console.log(this.searchForm);
+          console.log(response.data.list);
+          this.getForm = response.data.list[0];
+        });
+      if (this.getForm.qx === "1") {
+        localStorage.setItem("name", this.getForm.name);
+        localStorage.setItem("isLogin", "1");
+        this.$router.replace({ path: "/" });
+      } else if (this.getForm.qx === "0") {
+        localStorage.setItem("name", this.getForm.name);
+        localStorage.setItem("isLogin", "0");
+        this.$router.replace({ path: "/users" });
+      }
+    },
     login() {
-      axios
+      return axios
         .post("/users/login", {
           name: this.loginForm.username,
           password: this.loginForm.password,
         })
         .then(() => {
-          localStorage.setItem("isLogin", "1");
-          this.$router.replace({ path: "/" });
+          this.searchForm.name = this.loginForm.username;
+          this.searchForm.password = this.loginForm.password;
+          this.ok = true;
         })
         .catch((failResponse) => {
           this.$message.error(failResponse.response.data);
         });
+    },
+    async jump() {
+      await this.login();
+      if (this.ok) {
+        this.is_qx();
+      }
     },
     regist() {
       this.$router.replace("/regist");
@@ -100,7 +147,7 @@ export default {
 
 <style>
 #paper {
-  background: url("../assets/login.jpg") no-repeat;
+  background: url("../assets/bg.jpg") no-repeat;
   background-position: center;
   height: 100%;
   width: 100%;

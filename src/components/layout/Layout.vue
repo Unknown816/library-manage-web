@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-container>
-      <el-header>
+      <el-header class="header1">
         图书管理系统
         <div style="float: right">
           <el-button @click="quit">退出登录</el-button>
         </div>
       </el-header>
 
-      <el-container style="height: 550px">
+      <el-container style="height: 510px">
         <el-aside width="200px">
           <el-menu
             :default-active="$route.path"
@@ -22,14 +22,6 @@
               <i class="el-icon-s-home"></i>
               <span slot="title">图书管理</span>
             </el-menu-item>
-            <el-menu-item index="/bookgrid">
-              <i class="el-icon-menu"></i>
-              <span slot="title">图书浏览</span>
-            </el-menu-item>
-            <el-menu-item index="/bookpie">
-              <i class="el-icon-pie-chart"></i>
-              <span slot="title">点击量图</span>
-            </el-menu-item>
             <el-menu-item index="/user">
               <i class="el-icon-user"></i>
               <span slot="title">用户管理</span>
@@ -40,7 +32,7 @@
             </el-menu-item>
           </el-menu>
         </el-aside>
-        <el-main>
+        <el-main class="main1">
           <router-view />
         </el-main>
       </el-container>
@@ -56,6 +48,7 @@ export default {
     },
     quit() {
       this.$confirm("确认退出吗", "提示").then(() => {
+        localStorage.removeItem("name");
         localStorage.removeItem("isLogin");
         this.$router.replace({ path: "/login" });
       });

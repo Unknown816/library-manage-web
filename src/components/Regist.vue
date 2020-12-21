@@ -81,6 +81,8 @@ export default {
         name: "",
         password: "",
         checkPass: "",
+        qx: 0,
+        sex: "男",
       },
       responseResult: [],
       rules: {
@@ -131,7 +133,7 @@ export default {
 
 <style>
 #paper1 {
-  background: url("../assets/login.jpg") no-repeat;
+  background: url("../assets/bg.jpg") no-repeat;
   background-position: center;
   height: 100%;
   width: 100%;

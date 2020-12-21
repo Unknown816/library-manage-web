@@ -9,20 +9,27 @@
           <el-input v-model="searchForm.authors"></el-input>
         </el-form-item>
         <el-form-item label="出版商">
-          <el-input v-model="searchForm.publisher"></el-input>
+          <el-input v-modelF="searchForm.publisher"></el-input>
         </el-form-item>
       </el-form>
     </div>
     <div style="float: right">
-      <el-button @click="add" icon="el-icon-circle-plus-outline"
+      <el-button
+        @click="add"
+        icon="el-icon-circle-plus-outline"
+        type="primary"
+        plain
         >新增</el-button
       >
-      <el-button @click="loadData" icon="el-icon-search">查询</el-button>
+      <el-button @click="loadData" icon="el-icon-search" type="info" plain
+        >查询</el-button
+      >
     </div>
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="书名"></el-table-column>
       <el-table-column prop="authors" label="作者"> </el-table-column>
       <el-table-column prop="click" label="点击量"> </el-table-column>
+      <el-table-column prop="category" label="分类"> </el-table-column>
       <el-table-column prop="publisher" label="出版商"></el-table-column>
       <el-table-column prop="publishDate" label="出版时间">
         <template #default="{ row }">
@@ -71,6 +78,21 @@
             prefix-icon="el-icon-edit"
             placeholder="请输入作者"
           ></el-input>
+        </el-form-item>
+        <el-form-item label="分类" style="width: 200px">
+          <el-select
+            v-model="editForm.category"
+            placeholder="请选择"
+            style="width: 100px; float: left"
+          >
+            <el-option
+              v-for="item in category"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="出版商">
           <el-input
@@ -144,6 +166,15 @@ export default {
   name: "Book",
   data() {
     return {
+      category: [
+        { value: "经典", label: "经典" },
+        { value: "文学", label: "文学" },
+        { value: "流行", label: "流行" },
+        { value: "科幻", label: "科幻" },
+        { value: "政治", label: "政治" },
+        { value: "哲学", label: "哲学" },
+        { value: "经管", label: "经管" },
+      ],
       tableData: [],
       total: 0,
       dialogFormVisible: false,
@@ -161,6 +192,7 @@ export default {
         publisher: "",
         publishDate: "",
         click: null,
+        category: "",
       },
       pickerOptions: {
         shortcuts: [
@@ -227,6 +259,8 @@ export default {
         authors: "",
         publisher: "",
         publishDate: "",
+        click: null,
+        category: "",
       };
     },
     handleEdit() {

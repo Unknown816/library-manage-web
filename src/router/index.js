@@ -1,12 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Layout from '../components/layout/Layout.vue'
 import Book from '../views/Book.vue'
 import Login from '../components/Login.vue'
-import Layout from '../components/layout/Layout.vue'
-import Regist from '../components/Regist.vue'
 import User from '../views/User.vue'
-import BookGrid from '../views/BookGrid.vue'
-import BookPie from '../views/BookPie.vue'
+import BookGrid from '../views/library/BookGrid.vue'
+import BookPie from '../views/library/BookPie.vue'
+import Update from '../views/admin/Update.vue'
+import Layout2 from '../components/layout/Layout2.vue'
+import Main from '../views/Main.vue'
+import Regist from '../components/Regist.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,16 +36,6 @@ const routes = [
         component: Book
       },
       {
-        path: '/bookgrid',
-        name: 'BookGrid',
-        component: BookGrid
-      },
-      {
-        path: '/bookpie',
-        name: 'BookPie',
-        component: BookPie
-      },
-      {
         path: '/user',
         name: 'User',
         component: User
@@ -56,6 +50,34 @@ const routes = [
           return import(/* webpackChunkName: "about" */ '../views/About.vue')
         }
       }
+    ]
+  },
+  {
+    path: '/users',
+    name: 'Users',
+    component: Layout2,
+    redirect: '/main',
+    children: [
+      {
+        path: '/main',
+        name: 'Main',
+        component: Main
+      },
+      {
+        path: '/bookgrid',
+        name: 'BookGrid',
+        component: BookGrid
+      },
+      {
+        path: '/bookpie',
+        name: 'BookPie',
+        component: BookPie
+      },
+      {
+        path: '/update',
+        name: 'Update',
+        component: Update
+      },
     ]
   }
 ]

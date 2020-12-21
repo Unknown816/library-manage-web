@@ -1,6 +1,6 @@
 <template>
   <!--饼图-->
-  <div id="main" style="width: 100%; height: 100%"></div>
+  <div id="main"></div>
 </template>
 
 <script>
@@ -61,7 +61,7 @@ export default {
     drawPie(id) {
       this.charts = echarts.init(document.getElementById(id));
       this.charts.setOption({
-        //backgroundColor: '#909399',
+        backgroundColor: "#fff",
         title: {
           text: "图书点击量统计",
           subtext: "数据量小，还请见谅",
@@ -73,14 +73,14 @@ export default {
         }, // 提示文本的显示
         legend: {
           orient: "vertical",
-          right: 20,
+          right: 65,
           data: this.column,
         }, // 用例
         series: [
           {
             name: "图书",
             type: "pie",
-            radius: ["60%", "80%"],
+            radius: ["55%", "75%"],
             avoidLabelOverlap: false,
             label: {
               normal: {
@@ -115,4 +115,9 @@ export default {
 </script>
 
 <style>
+#main {
+  border-radius: 5px;
+  height: 480px;
+  width: 100%;
+}
 </style>

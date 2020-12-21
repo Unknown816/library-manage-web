@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="about">
-      Talking is nothing, show you my code.<br />
+      <el-card shadow="always"> Talking is nothing, show you my code. </el-card>
     </div>
   </div>
 </template>
