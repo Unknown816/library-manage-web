@@ -14,6 +14,12 @@
       <br />
       <el-divider></el-divider>
       <el-timeline>
+        <el-timeline-item timestamp="2020/12/21" placement="top">
+          <el-card>
+            <h4>更新 Github 模板</h4>
+            <p>Joan 提交于 2020/12/21</p>
+          </el-card>
+        </el-timeline-item>
         <el-timeline-item timestamp="2020/12/14" placement="top">
           <el-card>
             <h4>更新 Github 模板</h4>
