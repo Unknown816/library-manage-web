@@ -22,9 +22,10 @@
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="用户名"></el-table-column>
       <el-table-column prop="sex" label="性别"></el-table-column>
+      <el-table-column prop="qx" label="权限"></el-table-column>
       <el-table-column prop="createDate" label="创建时间">
         <template #default="{ row }">
-          {{ dateFormat(row.createData) }}
+          {{ dateFormat(row.createDate) }}
         </template>
       </el-table-column>
       <el-table-column label="操作" fixed="right" width="200">
@@ -86,9 +87,17 @@
             </el-option>
           </el-select>
         </el-form-item>
+        <el-form-item label="权限">
+          <el-input
+            v-model="editForm.qx"
+            autocomplete="new-text"
+            prefix-icon="el-icon-edit"
+            placeholder="请输入权限0/1"
+          ></el-input>
+        </el-form-item>
         <el-form-item label="创建时间">
           <el-date-picker
-            v-model="editForm.createData"
+            v-model="editForm.createDate"
             type="datetime"
             placeholder="选择日期时间"
             default-time="12:00:00"
@@ -139,8 +148,9 @@ export default {
         id: null,
         name: "",
         password: "",
-        createData: "",
+        createDate: "",
         sex: "",
+        qx: null,
       },
       pickerOptions: {
         shortcuts: [
@@ -199,8 +209,9 @@ export default {
         id: null,
         name: "",
         password: "",
-        createData: "",
+        createDate: "",
         sex: null,
+        qx: 0,
       };
     },
     edit(row) {
