@@ -4,6 +4,7 @@
       <el-header class="header1">
         图书管理系统
         <div style="float: right">
+          <el-button @click="toMain">用户界面</el-button>
           <el-button @click="quit">退出登录</el-button>
         </div>
       </el-header>
@@ -48,9 +49,14 @@ export default {
     },
     quit() {
       this.$confirm("确认退出吗", "提示").then(() => {
-        localStorage.removeItem("name");
+        localStorage.removeItem("token");
         localStorage.removeItem("isLogin");
         this.$router.replace({ path: "/login" });
+      });
+    },
+    toMain() {
+      this.$confirm("确认前往用户界面吗", "提示").then(() => {
+        this.$router.replace({ path: "/main" });
       });
     },
   },

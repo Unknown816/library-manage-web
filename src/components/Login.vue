@@ -66,6 +66,7 @@ export default {
     };
     return {
       ok: false,
+      token: "",
       loginForm: {
         username: "",
         password: "",
@@ -105,11 +106,11 @@ export default {
           this.getForm = response.data.list[0];
         });
       if (this.getForm.qx === "1") {
-        localStorage.setItem("name", this.getForm.name);
+        localStorage.setItem("token", this.token);
         localStorage.setItem("isLogin", "1");
         this.$router.replace({ path: "/" });
       } else if (this.getForm.qx === "0") {
-        localStorage.setItem("name", this.getForm.name);
+        localStorage.setItem("token", this.token);
         localStorage.setItem("isLogin", "0");
         this.$router.replace({ path: "/users" });
       }
@@ -120,9 +121,10 @@ export default {
           name: this.loginForm.username,
           password: this.loginForm.password,
         })
-        .then(() => {
+        .then((response) => {
           this.searchForm.name = this.loginForm.username;
           this.searchForm.password = this.loginForm.password;
+          this.token=response.data.token;
           this.ok = true;
         })
         .catch((failResponse) => {

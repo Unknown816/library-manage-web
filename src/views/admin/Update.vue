@@ -7,9 +7,6 @@
           <span>用户名: {{ name }}</span>
         </div>
         <div style="padding: 14px">
-          <span> 密 码: {{ password }} </span>
-        </div>
-        <div style="padding: 14px">
           <span> 性 别: {{ sex }} </span>
         </div>
         <el-button @click="edit" type="text">修改</el-button>
@@ -77,6 +74,7 @@ function filterNotEmpty(form) {
 export default {
   data() {
     return {
+      token: localStorage.getItem("token"),
       Isex: [
         { value: "男", label: "男" },
         { value: "女", label: "女" },
@@ -87,14 +85,21 @@ export default {
       isUpdate: false,
       searchForm: {
         id: null,
-        name: localStorage.getItem("name"),
         password: "",
         sex: "",
       },
     };
   },
   methods: {
-    loadData() {
+    getUid(){
+      return axios
+        .get("/token", { params:  {token:this.token}})
+        .then((response) => {
+          this.searchForm.id = response.data.list[0].userid;
+        });
+    },
+    async loadData() {
+      await this.getUid();
       axios
         .get("/users", { params: filterNotEmpty(this.searchForm) })
         .then((response) => {

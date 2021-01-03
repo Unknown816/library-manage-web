@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="wraper2">
+    <el-backtop target=".wraper2"></el-backtop>
     <div>
       <el-carousel :interval="5000" arrow="always" class="carousel1">
         <el-carousel-item v-for="item in list" :key="item.id">
@@ -69,6 +70,10 @@ export default {
 </script>
 
 <style>
+.wraper2 {
+  height: 82vh;
+  overflow-x: hidden;
+}
 .carousel1 {
   background-color: #fff;
   border-radius: 5px;

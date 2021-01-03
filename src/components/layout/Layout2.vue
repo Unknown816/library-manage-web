@@ -23,6 +23,12 @@
             <el-menu-item index="/bookpie">点击量图</el-menu-item>
           </el-submenu>
           <el-menu-item
+            index="/"
+            style="width: 120px"
+            :disabled="isLogin"
+            >管理中心</el-menu-item
+          >
+          <el-menu-item
             index="4"
             @click="quit"
             style="float: right; width: 120px"
@@ -37,14 +43,22 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isLogin:localStorage.getItem("isLogin") === "0",
+    };
+  },
   methods: {
     hasLogin() {
-      return localStorage.getItem("isLogin") === "0";
+      return (
+        localStorage.getItem("isLogin") === "0" ||
+        localStorage.getItem("isLogin") === "1"
+      );
     },
     quit() {
       this.$confirm("确认退出吗", "提示").then(() => {
         localStorage.removeItem("isLogin");
-        localStorage.removeItem("name");
+        localStorage.removeItem("token");
         this.$router.replace({ path: "/login" });
       });
     },

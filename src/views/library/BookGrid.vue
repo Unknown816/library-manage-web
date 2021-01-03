@@ -1,50 +1,52 @@
 <template>
-  <div class="grid-content">
-    <br />
-    <el-input
-      placeholder="请输入书名关键字"
-      v-model="searchForm.name"
-      class="input-with-select"
-      style="width: 50%"
-    >
-      <el-select
-        v-model="searchForm.category"
-        slot="prepend"
-        placeholder="分类"
+  <div class="wraper1">
+    <el-backtop target=".wraper1"></el-backtop>
+    <div class="grid-content">
+      <br />
+      <el-input
+        placeholder="请输入书名关键字"
+        v-model="searchForm.name"
+        class="input-with-select"
+        style="width: 50%"
       >
-        <el-option
-          v-for="item in category"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-        ></el-option>
-      </el-select>
-      <el-button slot="append" icon="el-icon-search"></el-button>
-    </el-input>
-
-    <br /><br />
-    <div class="book-grid">
-      <div
-        class="book-grid-item"
-        v-for="book of list"
-        :key="book.id"
-        style="border=1"
-      >
-        <el-card :body-style="{ padding: '0px' }" shadow="hover">
-          <el-image
-            style="height: 220px; border-radius: 5px"
-            fit="fill"
-            :src="book.fileBase64"
-            lazy
-          ></el-image>
-          <div class="book-name">
-            <div>《{{ book.name }}》</div>
-            <div>点击量: {{ book.click }}</div>
-            <el-button @click="add(book)" icon="el-icon-circle-plus"
-              >浏览</el-button
-            >
-          </div>
-        </el-card>
+        <el-select
+          v-model="searchForm.category"
+          slot="prepend"
+          placeholder="分类"
+        >
+          <el-option
+            v-for="item in category"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
+        <el-button slot="append" icon="el-icon-search"></el-button>
+      </el-input>
+      <br /><br />
+      <div class="book-grid">
+        <div
+          class="book-grid-item"
+          v-for="book of list"
+          :key="book.id"
+          style="border=1"
+        >
+          <el-card :body-style="{ padding: '0px' }" shadow="hover">
+            <el-image
+              style="height: 220px; border-radius: 5px"
+              fit="fill"
+              :src="book.fileBase64"
+              lazy
+            ></el-image>
+            <div class="book-name">
+              <div>《{{ book.name }}》</div>
+              <div>点击量: {{ book.click }}</div>
+              <el-button @click="add(book)" icon="el-icon-circle-plus"
+                >浏览</el-button
+              >
+            </div>
+          </el-card>
+        </div>
       </div>
     </div>
   </div>
@@ -77,6 +79,7 @@ export default {
       ],
       list: [],
       total: 0,
+      sortType: "click",
       searchForm: {
         name: null,
         authors: null,
@@ -153,6 +156,10 @@ export default {
 </script>
 
 <style>
+.wraper1 {
+  height: 82vh;
+  overflow-x: hidden;
+}
 .book-grid {
   border-radius: 10px;
   background-color: rgba(192, 189, 9, 0.13);
