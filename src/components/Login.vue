@@ -101,8 +101,6 @@ export default {
       await axios
         .get("/users", { params: filterNotEmpty(this.searchForm) })
         .then((response) => {
-          console.log(this.searchForm);
-          console.log(response.data.list);
           this.getForm = response.data.list[0];
         });
       if (this.getForm.qx === "1") {
@@ -122,9 +120,13 @@ export default {
           password: this.loginForm.password,
         })
         .then((response) => {
+          this.$message({
+            message: "登录成功，欢迎您！",
+            type: "success",
+          });
           this.searchForm.name = this.loginForm.username;
           this.searchForm.password = this.loginForm.password;
-          this.token=response.data.token;
+          this.token = response.data.token;
           this.ok = true;
         })
         .catch((failResponse) => {

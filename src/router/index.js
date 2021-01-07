@@ -6,6 +6,8 @@ import Login from '../components/Login.vue'
 import User from '../views/User.vue'
 import BookGrid from '../views/library/BookGrid.vue'
 import BookPie from '../views/library/BookPie.vue'
+import Content from '../views/library/Content.vue'
+import Talk from '../views/library/Talk.vue'
 import Update from '../views/admin/Update.vue'
 import Layout2 from '../components/layout/Layout2.vue'
 import Main from '../views/Main.vue'
@@ -72,6 +74,16 @@ const routes = [
         path: '/bookpie',
         name: 'BookPie',
         component: BookPie
+      },
+      {
+        path: '/content',
+        name: 'Content',
+        component: Content
+      },
+      {
+        path: '/talk',
+        name: 'Talk',
+        component: Talk
       },
       {
         path: '/update',

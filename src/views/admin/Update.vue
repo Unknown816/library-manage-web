@@ -2,12 +2,12 @@
   <div class="bg">
     <div class="person-card">
       <el-card :body-style="{ padding: '0px' }">
-        <el-avatar icon="el-icon-user-solid"></el-avatar>
+        <el-avatar :size="100" fit="fill" :src="list[0].fileBase64"></el-avatar>
         <div style="padding: 14px">
-          <span>用户名: {{ name }}</span>
+          <span>用户名: {{ list[0].name }}</span>
         </div>
         <div style="padding: 14px">
-          <span> 性 别: {{ sex }} </span>
+          <span> 性 别: {{ list[0].sex }} </span>
         </div>
         <el-button @click="edit" type="text">修改</el-button>
       </el-card>
@@ -48,6 +48,27 @@
               </el-option>
             </el-select>
           </el-form-item>
+          <el-form-item>
+            <el-upload
+              name="face"
+              action="/api/face"
+              :limit="1"
+              :on-success="handleFaceUploadSuccess"
+              :before-upload="beforeAvatarUpload"
+              :on-exceed="whenUploadtooMuch"
+            >
+              <el-button size="small" type="primary">点击上传头像</el-button>
+              <div slot="tip" class="el-upload_tip">
+                只能上传jpg/png文件，且不超过500kb
+              </div>
+            </el-upload>
+          </el-form-item>
+          <el-form-item>
+            <el-image
+              style="height: 170px; width: 170px"
+              :src="searchForm.fileBase64"
+            ></el-image>
+          </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="isUpdate = false">取 消</el-button>
@@ -61,27 +82,16 @@
 <script>
 import axios from "axios";
 
-function filterNotEmpty(form) {
-  let filtered = {};
-  for (const field of Object.keys(form)) {
-    if (form[field]) {
-      filtered[field] = form[field];
-    }
-  }
-  return filtered;
-}
-
 export default {
   data() {
     return {
+      list: [],
+      faceId: null,
       token: localStorage.getItem("token"),
       Isex: [
         { value: "男", label: "男" },
         { value: "女", label: "女" },
       ],
-      name: "",
-      password: "",
-      sex: "",
       isUpdate: false,
       searchForm: {
         id: null,
@@ -91,9 +101,9 @@ export default {
     };
   },
   methods: {
-    getUid(){
+    getUid() {
       return axios
-        .get("/token", { params:  {token:this.token}})
+        .get("/token", { params: { token: this.token } })
         .then((response) => {
           this.searchForm.id = response.data.list[0].userid;
         });
@@ -101,17 +111,14 @@ export default {
     async loadData() {
       await this.getUid();
       axios
-        .get("/users", { params: filterNotEmpty(this.searchForm) })
+        .get("/users", { params: { id: this.searchForm.id } })
         .then((response) => {
+          this.list = response.data.list;
           this.searchForm = response.data.list[0];
-          this.name = response.data.list[0].name;
-          this.password = response.data.list[0].password;
-          this.sex = response.data.list[0].sex;
         });
     },
     edit() {
       this.isUpdate = true;
-      this.editForm.id = this.id;
     },
     handleEdit() {
       axios
@@ -122,6 +129,26 @@ export default {
           this.isUpdate = false;
           this.loadData();
         });
+    },
+    handleFileUploadSuccess(response) {
+      return this.searchForm.face = {
+        id: response,
+      };
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+      const isLt500K = file.size / 1024 < 500;
+
+      if (!isJPG) {
+        this.$message.error("上传图片只能是 JPG 或 png 格式!");
+      }
+      if (!isLt500K) {
+        this.$message.error("上传图片大小不能超过 500KB!");
+      }
+      return isJPG && isLt500K;
+    },
+    whenUploadtooMuch() {
+      this.$message.error("上传图片个数不能超过 1 !");
     },
   },
   created() {

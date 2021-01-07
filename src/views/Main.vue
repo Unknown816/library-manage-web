@@ -1,6 +1,6 @@
 <template>
-  <div class="wraper2">
-    <el-backtop target=".wraper2"></el-backtop>
+  <div class="wraper">
+    <el-backtop target=".wraper"></el-backtop>
     <div>
       <el-carousel :interval="5000" arrow="always" class="carousel1">
         <el-carousel-item v-for="item in list" :key="item.id">
@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style>
-.wraper2 {
+.wraper {
   height: 82vh;
   overflow-x: hidden;
 }

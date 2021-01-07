@@ -9,7 +9,7 @@
           <el-input v-model="searchForm.authors"></el-input>
         </el-form-item>
         <el-form-item label="出版商">
-          <el-input v-modelF="searchForm.publisher"></el-input>
+          <el-input v-model="searchForm.publisher"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -28,10 +28,11 @@
     <el-table stripe :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="书名"></el-table-column>
       <el-table-column prop="authors" label="作者"> </el-table-column>
-      <el-table-column prop="click" label="点击量"> </el-table-column>
+      <el-table-column prop="click" label="点击量" sortable> </el-table-column>
+      <el-table-column prop="pages" label="页数" sortable></el-table-column>
       <el-table-column prop="category" label="分类"> </el-table-column>
       <el-table-column prop="publisher" label="出版商"></el-table-column>
-      <el-table-column prop="publishDate" label="出版时间">
+      <el-table-column prop="publishDate" label="出版时间" sortable>
         <template #default="{ row }">
           {{ dateFormat(row.publishDate) }}
         </template>
@@ -63,45 +64,52 @@
       :visible.sync="dialogFormVisible"
     >
       <el-form :model="editForm" label-width="80px" label-position="left">
-        <el-form-item label="书名">
-          <el-input
-            v-model="editForm.name"
-            autocomplete="new-text"
-            prefix-icon="el-icon-edit"
-            placeholder="请输入书名"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="作者">
-          <el-input
-            v-model="editForm.authors"
-            autocomplete="new-text"
-            prefix-icon="el-icon-edit"
-            placeholder="请输入作者"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="分类" style="width: 200px">
-          <el-select
-            v-model="editForm.category"
-            placeholder="请选择"
-            style="width: 100px; float: left"
-          >
-            <el-option
-              v-for="item in category"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="出版商">
-          <el-input
-            v-model="editForm.publisher"
-            autocomplete="new-text"
-            prefix-icon="el-icon-edit"
-            placeholder="请输入出版商"
-          ></el-input>
-        </el-form-item>
+        <e-row>
+          <e-col :span="8">
+            <el-form-item label="书名">
+              <el-input
+                v-model="editForm.name"
+                autocomplete="new-text"
+                prefix-icon="el-icon-edit"
+                placeholder="请输入书名"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="作者">
+              <el-input
+                v-model="editForm.authors"
+                autocomplete="new-text"
+                prefix-icon="el-icon-edit"
+                placeholder="请输入作者"
+              ></el-input>
+            </el-form-item>
+          </e-col>
+          <e-col :span="8">
+            <el-form-item label="分类" style="width: 200px">
+              <el-select
+                v-model="editForm.category"
+                placeholder="请选择"
+                style="width: 100px; float: left"
+              >
+                <el-option
+                  v-for="item in category"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="出版商">
+              <el-input
+                v-model="editForm.publisher"
+                autocomplete="new-text"
+                prefix-icon="el-icon-edit"
+                placeholder="请输入出版商"
+              ></el-input>
+            </el-form-item>
+          </e-col>
+        </e-row>
+
         <el-form-item label="点击量">
           <el-input
             v-model="editForm.click"
@@ -120,11 +128,23 @@
           >
           </el-date-picker>
         </el-form-item>
+        <el-form-item label="简介">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 4 }"
+            placeholder="请输入简介内容"
+            v-model="editForm.brifContent"
+          >
+          </el-input>
+        </el-form-item>
         <el-form-item>
           <el-upload
+            name="file"
             action="/api/file"
             :limit="1"
             :on-success="handleFileUploadSuccess"
+            :before-upload="beforeAvatarUpload"
+            :on-exceed="whenUploadtooMuch"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">
@@ -193,6 +213,7 @@ export default {
         publishDate: "",
         click: null,
         category: "",
+        brifContent: "",
       },
       pickerOptions: {
         shortcuts: [
@@ -261,6 +282,7 @@ export default {
         publishDate: "",
         click: null,
         category: "",
+        brifContent: "",
       };
     },
     handleEdit() {
@@ -284,6 +306,21 @@ export default {
       this.editForm.file = {
         id: response,
       };
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === "image/jpeg" || file.type === "image/png";
+      const isLt500K = file.size / 1024 < 500;
+
+      if (!isJPG) {
+        this.$message.error("上传图片只能是 JPG 或 png 格式!");
+      }
+      if (!isLt500K) {
+        this.$message.error("上传图片大小不能超过 500KB!");
+      }
+      return isJPG && isLt500K;
+    },
+    whenUploadtooMuch() {
+      this.$message.error("上传图片个数不能超过 1 !");
     },
   },
 };

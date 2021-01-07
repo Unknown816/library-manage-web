@@ -1,6 +1,6 @@
 <template>
-  <div class="wraper1">
-    <el-backtop target=".wraper1"></el-backtop>
+  <div class="wraper">
+    <el-backtop target=".wraper"></el-backtop>
     <div class="grid-content">
       <br />
       <el-input
@@ -107,8 +107,8 @@ export default {
           this.total = response.data.total;
         });
     },
-    add(book) {
-      axios
+    async add(book) {
+      await axios
         .get("/book", {
           params: { id: book.id },
         })
@@ -122,15 +122,17 @@ export default {
             .then(() => {
               this.$alert("请支持正版！", "建议", {
                 confirmButtonText: "确定",
-                callback: (action) => {
+                callback: () => {
                   this.$message({
                     type: "success",
-                    message: `action: ${action}`,
+                    message: "祝您阅读愉快！",
                   });
                 },
               });
             });
         });
+      localStorage.setItem("bookId", book.id);
+      this.$router.replace({ path: "/content" });
     },
   },
   watch: {
@@ -156,10 +158,6 @@ export default {
 </script>
 
 <style>
-.wraper1 {
-  height: 82vh;
-  overflow-x: hidden;
-}
 .book-grid {
   border-radius: 10px;
   background-color: rgba(192, 189, 9, 0.13);

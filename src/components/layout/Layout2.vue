@@ -7,7 +7,6 @@
           class="el-menu-demo"
           router
           mode="horizontal"
-          @select="handleSelect"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -22,10 +21,8 @@
             <el-menu-item index="/bookgrid" style="">图书浏览</el-menu-item>
             <el-menu-item index="/bookpie">点击量图</el-menu-item>
           </el-submenu>
-          <el-menu-item
-            index="/"
-            style="width: 120px"
-            :disabled="isLogin"
+          <el-menu-item index="/talk" style="width: 120px">留言板</el-menu-item>
+          <el-menu-item index="/" style="width: 120px" :disabled="isLogin"
             >管理中心</el-menu-item
           >
           <el-menu-item
@@ -45,7 +42,7 @@
 export default {
   data() {
     return {
-      isLogin:localStorage.getItem("isLogin") === "0",
+      isLogin: localStorage.getItem("isLogin") === "0",
     };
   },
   methods: {
@@ -83,6 +80,6 @@ export default {
 .main2 {
   background-color: #f2f6fc;
   text-align: center;
-  height: 515px;
+  height: 100%;
 }
 </style>
