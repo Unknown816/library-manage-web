@@ -12,6 +12,7 @@ import Update from '../views/admin/Update.vue'
 import Layout2 from '../components/layout/Layout2.vue'
 import Main from '../views/Main.vue'
 import Regist from '../components/Regist.vue'
+import Lend from '../views/Lend.vue'
 
 Vue.use(VueRouter)
 
@@ -41,6 +42,11 @@ const routes = [
         path: '/user',
         name: 'User',
         component: User
+      },
+      {
+        path: '/lend',
+        name: 'Lend',
+        component: Lend
       },
       {
         path: '/about',

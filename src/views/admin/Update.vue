@@ -130,7 +130,7 @@ export default {
           this.loadData();
         });
     },
-    handleFileUploadSuccess(response) {
+    handleFaceUploadSuccess(response) {
       return this.searchForm.face = {
         id: response,
       };

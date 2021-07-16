@@ -27,6 +27,10 @@
               <i class="el-icon-user"></i>
               <span slot="title">用户管理</span>
             </el-menu-item>
+            <el-menu-item index="/lend">
+              <i class="el-icon-user"></i>
+              <span slot="title">借阅管理</span>
+            </el-menu-item>
             <el-menu-item index="/about">
               <i class="el-icon-chat-line-square"></i>
               <span slot="title">关于</span>
