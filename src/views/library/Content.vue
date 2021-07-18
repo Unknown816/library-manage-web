@@ -1,6 +1,81 @@
 <template>
   <div>
-    <div class="pc">
+    <el-row :gutter="20" type="flex" justify="center">
+      <el-col :span="2"><div></div></el-col>
+      <el-col :span="10">
+        <div class="grid-content bg-purple">
+          <el-card :body-style="{ padding: '0px' }" class="card">
+        <el-image
+          class="p1"
+          style="height: 220px; width: 170px; border-radius: 5px; float: left"
+          fit="fill"
+          :src="list[0].fileBase64"
+        ></el-image>
+        <div class="pc1">
+          <div style="padding: 14px; text-align: left">
+            <span>书名: {{ list[0].name }}</span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>作者: {{ list[0].authors }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>分类: {{ list[0].category }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>出版商: {{ list[0].publisher }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>出版日期: {{ dateFormat(list[0].publishDate) }} </span>
+          </div>
+        </div>
+        <div>
+          <el-button @click="showBrifContent" type="text">简介</el-button>
+          <el-button type="text">目录</el-button>
+          <el-button @click="back" type="text">返回</el-button>
+        </div>
+      </el-card>
+        </div>
+      </el-col>
+
+      <el-col :span="10">
+        <div class="grid-content bg-purple-light">
+          <el-card :body-style="{ padding: '0px' }" class="card">
+        <el-image
+          class="p1"
+          style="height: 220px; width: 170px; border-radius: 5px; float: left"
+          fit="fill"
+          :src="list[0].fileBase64"
+        ></el-image>
+        <div class="pc1">
+          <div style="padding: 14px; text-align: left">
+            <span>书名: {{ list[0].name }}</span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>作者: {{ list[0].authors }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>分类: {{ list[0].category }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>出版商: {{ list[0].publisher }} </span>
+          </div>
+          <div style="padding: 14px; text-align: left">
+            <span>出版日期: {{ dateFormat(list[0].publishDate) }} </span>
+          </div>
+        </div>
+        <div>
+          <el-button @click="showBrifContent" type="text">简介</el-button>
+          <el-button type="text">目录</el-button>
+          <el-button @click="back" type="text">返回</el-button>
+        </div>
+      </el-card>
+        </div>
+      </el-col>
+
+      <el-col :span="2"><div></div></el-col>
+    </el-row>
+
+    <el-row>
       <el-card :body-style="{ padding: '0px' }" class="card">
         <el-image
           class="p1"
@@ -31,6 +106,9 @@
           <el-button @click="back" type="text">返回</el-button>
         </div>
       </el-card>
+    </el-row>
+    <div class="pc">
+      
     </div>
     <el-dialog
       title="简介"
@@ -108,5 +186,20 @@ export default {
 .p1 {
   margin-left: 20%;
   margin-top: 13%;
+}
+.el-row {
+  margin-bottom: 20px;
+  /* &:last-child {
+      margin-bottom: 0;
+  } */
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
 }
 </style>

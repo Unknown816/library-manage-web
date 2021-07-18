@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <div>
     <div>
-      <el-form inline>
+      <el-form class="on-table-input" inline>
         <el-form-item label="书名">
           <el-input v-model="searchForm.name"></el-input>
         </el-form-item>
@@ -25,18 +25,25 @@
         >查询</el-button
       >
     </div>
-    <el-table stripe :data="tableData" style="width: 100%" border>
-      <el-table-column prop="name" label="书名"></el-table-column>
-      <el-table-column prop="authors" label="作者"> </el-table-column>
-      <el-table-column prop="click" label="点击量" sortable> </el-table-column>
-      <el-table-column prop="pages" label="页数" sortable></el-table-column>
-      <el-table-column prop="category" label="分类"> </el-table-column>
-      <el-table-column prop="publisher" label="出版商"></el-table-column>
-      <el-table-column prop="publishDate" label="出版时间" sortable>
+    <!-- 图书查询表 -->
+    <div>
+      <el-table
+        class="table"
+        stripe
+        :data="tableData"
+        height="666"
+        border>
+      <el-table-column prop="publishDate" width="150" fixed label="出版时间" sortable>
         <template #default="{ row }">
           {{ dateFormat(row.publishDate) }}
         </template>
       </el-table-column>
+      <el-table-column prop="name" width="200" label="书名"></el-table-column>
+      <el-table-column prop="authors" width="200" label="作者"> </el-table-column>
+      <el-table-column prop="click" width="120" label="点击量" sortable> </el-table-column>
+      <el-table-column prop="pages" width="120" label="页数" sortable></el-table-column>
+      <el-table-column prop="category" width="120" label="分类"> </el-table-column>
+      <el-table-column prop="publisher" width="200" label="出版商"></el-table-column>
       <el-table-column label="操作" fixed="right" width="200">
         <template #default="{ row }">
           <el-button size="mini" icon="el-icon-edit" @click="edit(row)"
@@ -52,13 +59,19 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
+    </div>
+    <!-- 分页 -->
+    <div>
+      <el-pagination
+      class="page"
       :page-size.sync="searchForm.pageSize"
       :current-page.sync="searchForm.pageIndex"
       :total="total"
-      layout="prev, pager, next"
+      layout="total, sizes, prev, pager, next, jumper"
     >
     </el-pagination>
+    </div>
+    <!-- 编辑/新增对话框 -->
     <el-dialog
       :title="editForm.id ? '编辑' : '新增'"
       :visible.sync="dialogFormVisible"
@@ -137,6 +150,7 @@
           >
           </el-input>
         </el-form-item>
+        <!-- 图片上传 -->
         <el-form-item>
           <el-upload
             name="file"
@@ -326,4 +340,16 @@ export default {
 };
 </script>
 <style>
+.on-table-input{
+  position: relative;
+  top: 20px;
+}
+.table{
+  position: relative;
+  top: 10px;
+}
+.page{
+  position: relative;
+  top: 15px;
+}
 </style>

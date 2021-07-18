@@ -2,7 +2,7 @@
   <div class="wraper">
     <el-backtop target=".wraper"></el-backtop>
     <div>
-      <el-carousel :interval="5000" arrow="always" class="carousel1">
+      <el-carousel :interval="5000" arrow="always" class="carousel">
         <el-carousel-item v-for="item in list" :key="item.id">
           <el-image fit="fill" :src="item.url" style="width: 100%"></el-image>
         </el-carousel-item>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -71,10 +72,10 @@ export default {
 
 <style>
 .wraper {
-  height: 82vh;
+  height: 100%;
   overflow-x: hidden;
 }
-.carousel1 {
+.carousel {
   background-color: #fff;
   border-radius: 5px;
   width: 80%;

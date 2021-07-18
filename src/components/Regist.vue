@@ -1,5 +1,5 @@
 <template>
-  <body id="paper1">
+  <body class="paper">
     <el-form
       :model="registForm"
       status-icon
@@ -54,6 +54,7 @@ export default {
       if (value === "") {
         return callback(new Error("用户名不能为空"));
       } else {
+        
         return callback();
       }
     };
@@ -80,6 +81,7 @@ export default {
       registForm: {
         name: "",
         password: "",
+        createDate: 0,
         checkPass: "",
         qx: 0,
         sex: "男",
@@ -105,16 +107,19 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           axios
-            .post("/users", {
-              ...this.registForm,
-            })
-            .then(() => {
-              this.$router.replace({ path: "/login" });
+          .post("/users/register", {
+            ...this.registForm,
+          })
+          .then(() => {
+            this.$message({
+              message: "注册成功！",
+              type: "success",
             });
-          this.$message({
-            message: "注册成功！",
-            type: "success",
-          });
+            this.$router.replace({ path: "/login" });
+          })
+          .catch((failResponse) => {
+            this.$message.error(failResponse.response.data);
+          });      
         } else {
           console.log("error submit!!");
           return false;
@@ -132,29 +137,5 @@ export default {
 </script>
 
 <style>
-#paper1 {
-  background: url("../assets/bg.jpg") no-repeat;
-  background-position: center;
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  position: fixed;
-}
-body {
-  margin: 0;
-}
-.login-container {
-  border-radius: 15px;
-  margin: 90px auto;
-  width: 350px;
-  padding: 35px 35px 15px 35px;
-  background: #fff;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 0 25px #cac6c6;
-}
-.login_title {
-  margin: 0px auto 40px auto;
-  text-align: center;
-  color: #505458;
-}
+
 </style>

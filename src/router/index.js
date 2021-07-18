@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '../components/layout/Layout.vue'
-import Book from '../views/Book.vue'
+import Book from '../views/manage/Book.vue'
 import Login from '../components/Login.vue'
-import User from '../views/User.vue'
+import User from '../views/manage/User.vue'
 import BookGrid from '../views/library/BookGrid.vue'
 import BookPie from '../views/library/BookPie.vue'
 import Content from '../views/library/Content.vue'
@@ -12,7 +12,9 @@ import Update from '../views/admin/Update.vue'
 import Layout2 from '../components/layout/Layout2.vue'
 import Main from '../views/Main.vue'
 import Regist from '../components/Regist.vue'
-import Lend from '../views/Lend.vue'
+import Lend from '../views/manage/Lend.vue'
+import BookShelf from '../views/admin/BookShelf.vue'
+import Notice from '../views/manage/Notice.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +46,11 @@ const routes = [
         component: User
       },
       {
+        path: '/notice',
+        name: 'Notice',
+        component: Notice
+      },
+      {
         path: '/lend',
         name: 'Lend',
         component: Lend
@@ -55,7 +62,7 @@ const routes = [
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: function () {
-          return import(/* webpackChunkName: "about" */ '../views/About.vue')
+          return import(/* webpackChunkName: "about" */ '../views/manage/About.vue')
         }
       }
     ]
@@ -95,6 +102,11 @@ const routes = [
         path: '/update',
         name: 'Update',
         component: Update
+      },
+      {
+        path: '/bookshelf',
+        name: 'BookShelf',
+        component: BookShelf
       },
     ]
   }

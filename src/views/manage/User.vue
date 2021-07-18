@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-form inline>
+      <el-form class="on-table-input" inline>
         <el-form-item label="用户名">
           <el-input v-model="searchForm.name"></el-input>
         </el-form-item>
@@ -19,15 +19,22 @@
         >查询</el-button
       >
     </div>
-    <el-table stripe :data="tableData" style="width: 100%" border>
-      <el-table-column prop="name" label="用户名"></el-table-column>
-      <el-table-column prop="sex" label="性别"></el-table-column>
-      <el-table-column prop="qx" label="权限"></el-table-column>
-      <el-table-column prop="createDate" label="创建时间">
+    <!-- 用户查询表 -->
+    <div>
+      <el-table
+      class="table"
+      stripe 
+      :data="tableData" 
+      height="666"
+      border>
+      <el-table-column prop="createDate" width="150" fixed label="创建时间" sortable>
         <template #default="{ row }">
           {{ dateFormat(row.createDate) }}
         </template>
       </el-table-column>
+      <el-table-column prop="name" width="150" label="用户名"></el-table-column>
+      <el-table-column prop="sex" width="150" label="性别"></el-table-column>
+      <el-table-column prop="qx" width="150" label="权限"></el-table-column>
       <el-table-column label="操作" fixed="right" width="200">
         <template #default="{ row }">
           <el-button size="mini" icon="el-icon-edit" @click="edit(row)"
@@ -43,13 +50,19 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
+    </div>
+    <!-- 分页 -->
+    <div>
+      <el-pagination
+      class="page"
       :page-size.sync="searchForm.pageSize"
       :current-page.sync="searchForm.pageIndex"
       :total="total"
-      layout="prev, pager, next"
+      layout="total, sizes, prev, pager, next, jumper"
     >
     </el-pagination>
+    </div>
+    
     <el-dialog
       :title="editForm.id ? '编辑' : '新增'"
       :visible.sync="dialogFormVisible"

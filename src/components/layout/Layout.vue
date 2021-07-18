@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container>
-      <el-header class="header1">
+      <el-header>
         图书管理系统
         <div style="float: right">
           <el-button @click="toMain">用户界面</el-button>
@@ -9,7 +9,7 @@
         </div>
       </el-header>
 
-      <el-container style="height: 510px">
+      <el-container style="height: 100%">
         <el-aside width="200px">
           <el-menu
             :default-active="$route.path"
@@ -30,6 +30,10 @@
             <el-menu-item index="/lend">
               <i class="el-icon-user"></i>
               <span slot="title">借阅管理</span>
+            </el-menu-item>
+            <el-menu-item index="/notice">
+              <i class="el-icon-user"></i>
+              <span slot="title">公告发布</span>
             </el-menu-item>
             <el-menu-item index="/about">
               <i class="el-icon-chat-line-square"></i>
@@ -80,9 +84,8 @@ export default {
 }
 .categories {
   position: fixed;
-  margin-left: 50%;
-  left: -47%;
-  top: 15%;
+  left: 35px;
+  top: 85px;
   width: 150px;
 }
 </style>

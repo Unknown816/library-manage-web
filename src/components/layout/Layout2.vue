@@ -1,10 +1,9 @@
 <template>
   <div>
     <el-container>
-      <el-header class="header2">
+      <el-header>
         <el-menu
           :default-active="$route.path"
-          class="el-menu-demo"
           router
           mode="horizontal"
           background-color="#545c64"
@@ -15,6 +14,7 @@
           <el-submenu index="3" style="width: 120px">
             <template slot="title">用户中心</template>
             <el-menu-item index="/update">个人信息</el-menu-item>
+            <el-menu-item index="/bookshelf">个人书架</el-menu-item>
           </el-submenu>
           <el-submenu index="2" style="width: 120px">
             <template slot="title">图书馆</template>
@@ -26,14 +26,13 @@
             >管理中心</el-menu-item
           >
           <el-menu-item
-            index="4"
             @click="quit"
             style="float: right; width: 120px"
             >退出登录</el-menu-item
           >
         </el-menu>
       </el-header>
-      <el-main class="main2"><router-view /></el-main>
+      <el-main><router-view /></el-main>
     </el-container>
   </div>
 </template>
@@ -69,17 +68,4 @@ export default {
 </script>
 
 <style>
-.el-menu-demo {
-  width: 100%;
-}
-.header2 {
-  background-color: #f2f6fc;
-  text-align: center;
-  line-height: 60px;
-}
-.main2 {
-  background-color: #f2f6fc;
-  text-align: center;
-  height: 100%;
-}
 </style>

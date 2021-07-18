@@ -1,5 +1,5 @@
 <template>
-  <body id="paper">
+  <body class="paper">
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -150,7 +150,7 @@ export default {
 </script>
 
 <style>
-#paper {
+.paper {
   background: url("../assets/bg.jpg") no-repeat;
   background-position: center;
   height: 100%;
@@ -163,7 +163,7 @@ body {
 }
 .login-container {
   border-radius: 15px;
-  margin: 90px auto;
+  margin: 12% auto;
   width: 350px;
   padding: 35px 35px 15px 35px;
   background: #fff;
