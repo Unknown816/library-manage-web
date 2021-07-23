@@ -25,7 +25,7 @@
       class="table"
       stripe 
       :data="tableData" 
-      height="666"
+      height="635"
       border>
       <el-table-column prop="createDate" width="150" fixed label="创建时间" sortable>
         <template #default="{ row }">

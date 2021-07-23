@@ -15,6 +15,8 @@ import Regist from '../components/Regist.vue'
 import Lend from '../views/manage/Lend.vue'
 import BookShelf from '../views/admin/BookShelf.vue'
 import Notice from '../views/manage/Notice.vue'
+import MessageInfo from '../views/notices/MessageInfo.vue'
+import MessageDetail from '../views/notices/MessageDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -92,6 +94,16 @@ const routes = [
         path: '/content',
         name: 'Content',
         component: Content
+      },
+      {
+        path: '/messageinfo',
+        name: 'MessageInfo',
+        component: MessageInfo,    
+      },
+      {
+          path: '/messagedetail',
+          name: 'MessageDetail',
+          component: MessageDetail 
       },
       {
         path: '/talk',

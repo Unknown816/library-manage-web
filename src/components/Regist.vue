@@ -85,6 +85,9 @@ export default {
         checkPass: "",
         qx: 0,
         sex: "男",
+        // bookShelf:{
+        //   id: null,
+        // },
       },
       responseResult: [],
       rules: {
@@ -137,5 +140,4 @@ export default {
 </script>
 
 <style>
-
 </style>

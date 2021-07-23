@@ -162,13 +162,15 @@ export default {
   background: url("../../assets/psbg.jpg") no-repeat;
   background-position: center;
   border-radius: 5px;
-  height: 83%;
+  height: 90%;
   width: 80%;
   margin-left: 10%;
   background-size: cover;
   position: fixed;
 }
 .person-card {
+  padding: 35px 35px 35px 35px;
+  text-align: center;
   margin-top: 8%;
   width: 30%;
   margin-left: 35%;

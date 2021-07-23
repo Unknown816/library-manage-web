@@ -14,13 +14,14 @@
           <el-submenu index="3" style="width: 120px">
             <template slot="title">用户中心</template>
             <el-menu-item index="/update">个人信息</el-menu-item>
-            <el-menu-item index="/bookshelf">个人书架</el-menu-item>
+            <el-menu-item index="/bookshelf">我的书架</el-menu-item>
           </el-submenu>
           <el-submenu index="2" style="width: 120px">
             <template slot="title">图书馆</template>
             <el-menu-item index="/bookgrid" style="">图书浏览</el-menu-item>
             <el-menu-item index="/bookpie">点击量图</el-menu-item>
           </el-submenu>
+          <el-menu-item index="/messageinfo" style="width: 120px">公告栏</el-menu-item>
           <el-menu-item index="/talk" style="width: 120px">留言板</el-menu-item>
           <el-menu-item index="/" style="width: 120px" :disabled="isLogin"
             >管理中心</el-menu-item

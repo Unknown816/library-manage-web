@@ -31,7 +31,7 @@
         class="table"
         stripe
         :data="tableData"
-        height="666"
+        height="635"
         border>
       <el-table-column prop="publishDate" width="150" fixed label="出版时间" sortable>
         <template #default="{ row }">
@@ -60,6 +60,7 @@
       </el-table-column>
     </el-table>
     </div>
+    <!-- 图书查询表 end -->
     <!-- 分页 -->
     <div>
       <el-pagination
@@ -71,6 +72,7 @@
     >
     </el-pagination>
     </div>
+    <!-- 分页 end -->
     <!-- 编辑/新增对话框 -->
     <el-dialog
       :title="editForm.id ? '编辑' : '新增'"
@@ -166,12 +168,15 @@
             </div>
           </el-upload>
         </el-form-item>
+        <!-- 图片上传 end -->
+        <!-- 图片显示 -->
         <el-form-item>
           <el-image
             style="height: 220px; width: 170px"
             :src="editForm.fileBase64"
           ></el-image>
         </el-form-item>
+        <!-- 图片显示 end -->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
@@ -350,6 +355,5 @@ export default {
 }
 .page{
   position: relative;
-  top: 15px;
 }
 </style>

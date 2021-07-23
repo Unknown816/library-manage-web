@@ -2,52 +2,60 @@
   <div class="wraper">
     <el-backtop target=".wraper"></el-backtop>
     <div class="grid-content">
-      <br />
-      <el-input
-        placeholder="请输入书名关键字"
-        v-model="searchForm.name"
-        class="input-with-select"
-        style="width: 50%"
-      >
-        <el-select
-          v-model="searchForm.category"
-          slot="prepend"
-          placeholder="分类"
-        >
+      <el-row :gutter="20" type="flex" justify="center">
+        <el-col :span="8"></el-col>
+        <el-col :span="8">
+          <!-- 搜索栏 -->
+          <el-input
+            placeholder="请输入书名关键字"
+            v-model="searchForm.name"
+          >
+          <el-select
+            v-model="searchForm.category"
+            slot="prepend"
+            placeholder="分类"
+          >
           <el-option
             v-for="item in category"
             :key="item.value"
             :label="item.label"
             :value="item.value"
           ></el-option>
-        </el-select>
-        <el-button slot="append" icon="el-icon-search"></el-button>
-      </el-input>
-      <br /><br />
-      <div class="book-grid">
-        <div
-          class="book-grid-item"
-          v-for="book of list"
-          :key="book.id"
-          style="border=1"
-        >
-          <el-card :body-style="{ padding: '0px' }" shadow="hover">
-            <el-image
-              style="height: 220px; border-radius: 5px"
-              fit="fill"
-              :src="book.fileBase64"
-              lazy
-            ></el-image>
-            <div class="book-name">
+          </el-select>
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+        <!-- 搜索栏 end -->
+        </el-col>
+        <el-col :span="8"></el-col>
+      </el-row>
+      <el-row type="flex" justify="center">
+        <el-col>
+          <!-- 图书grid -->
+          <div class="book-grid">
+            <div
+              class="book-grid-item"
+              v-for="book of list"
+              :key="book.id"
+              style="border=1"
+            >
+              <el-card :body-style="{ padding: '0px' }" shadow="hover">
+              <el-image
+                style="height: 260px; border-radius: 5px"
+                fit="fill"
+                :src="book.fileBase64"
+                lazy
+              ></el-image>
+              <div class="book-name">
               <div>《{{ book.name }}》</div>
               <div>点击量: {{ book.click }}</div>
-              <el-button @click="add(book)" icon="el-icon-circle-plus"
-                >浏览</el-button
-              >
-            </div>
-          </el-card>
+                <el-button @click="add(book)" icon="el-icon-circle-plus">浏览</el-button>
+              </div>
+            </el-card>
+          </div>
         </div>
-      </div>
+        <!-- 图书grid end -->
+        </el-col>
+      </el-row>
     </div>
   </div>
 </template>
@@ -160,12 +168,12 @@ export default {
 <style>
 .book-grid {
   border-radius: 10px;
-  background-color: rgba(192, 189, 9, 0.13);
-  margin-left: 10%;
+  background-color: rgba(235, 234, 187, 0.13);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 170px);
-  gap: 30px;
-  width: 79%;
+  grid-template-columns: repeat(7, 180px);
+  gap: 38px;
+  width: 80%;
 }
 .book-grid-item {
   border-radius: 10px;

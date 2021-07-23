@@ -28,7 +28,7 @@
         class="table"
         stripe
         :data="tableData"
-        height="666"
+        height="635"
         border>
       <el-table-column prop="createdDate" width="150" fixed label="发布时间" sortable>
         <template #default="{ row }">
@@ -155,7 +155,7 @@ export default {
             this.loadData();
         },
         deep: true,
-    },
+      },
     },
     methods: {
         loadData() {

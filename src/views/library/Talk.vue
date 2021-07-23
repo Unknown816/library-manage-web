@@ -2,6 +2,7 @@
   <div class="wraper">
     <el-backtop target=".wraper"></el-backtop>
     <div class="talk-container">
+      <!-- 留言板 -->
       <el-form
         ref="talkForm"
         :model="talkForm"
@@ -24,8 +25,10 @@
           <el-button @click="reset('talkForm')" type="primary">重置</el-button>
         </el-form-item>
       </el-form>
+      <!-- 留言板 end -->
     </div>
     <br /><br />
+    <!-- 留言遍历 -->
     <div class="talk-grid">
       <div class="talk-grid-item" v-for="talk of list" :key="talk.id">
         <el-card :body-style="{ padding: '0px' }" shadow="hover">
@@ -55,6 +58,7 @@
                 type="danger"
                 >删除</el-button
               >
+              <!-- 留言回复 -->
               <el-popover placement="right" width="400" trigger="click">
                 <el-input
                   name="call"
@@ -75,6 +79,7 @@
                 >
                 <el-button slot="reference" size="mini">回复</el-button>
               </el-popover>
+              <!-- 留言回复 end -->
             </div>
             <div style="float: right; text-align: right; font-size: 12px">
               发表于 {{ dateFormat(talk.talkDate) }}
@@ -83,6 +88,7 @@
         </el-card>
       </div>
     </div>
+    <!-- 留言遍历 end -->
   </div>
 </template>
 
