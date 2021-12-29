@@ -26,15 +26,15 @@ jobs:
 
     - name: Install npm
       uses: bahmutov/npm-install@v1
-      
+
     - name: Build
       run: npm run build --if-present
     
-    - name: 将 JAR 包部署到服务器
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: dist
-          remote: /tmp/dist
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
+    - name: 将 dist 部署到服务器
+      uses: garygrossgarten/github-action-scp@release
+      with:
+        local: dist
+        remote: /tmp/dist
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
